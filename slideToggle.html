@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slideToggle</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .content {
+      transition: height 0.35s ease-in-out;
+      overflow: hidden;
+    }
+
+    .content:not(.active) {
+      /* height: 0; */
+      display: none;
+      /* transform: rotateX(90deg); */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img class="toggle" src="./images/824_LP02_03btn.png" alt="">
+    <img class="content active" src="./images/824_LP02_04.png" alt="">
+  </div>
+  <div class="box">
+    <img class="toggle" src="./images/824_LP02_03btn.png" alt="">
+    <img class="content active" src="./images/824_LP02_04.png" alt="">
+  </div>
+  <script>
+    const toggles = document.querySelectorAll('.toggle');
+    const contents = document.querySelectorAll('.content')
+
+    toggles.forEach((toggle, i) => {
+      toggle.addEventListener('click', event => {
+        event.preventDefault()
+        console.log(toggle, contents[i])
+        if (!contents[i].classList.contains('active')) {
+          contents[i].classList.add('active')
+        } else {
+          contents[i].classList.remove('active')
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>

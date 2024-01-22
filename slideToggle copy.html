@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>slideToggle</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      width: 300px;
+      border: 1px solid #000;
+      margin: 10px;
+      cursor: pointer;
+    }
+
+    .toggle-container {
+      transition: height 0.35s ease-in-out;
+      overflow: hidden;
+    }
+
+    .toggle-container:not(.active) {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="js-toggle" data-container="toggle-1">Click</div>
+    <div class="toggle-container" id="toggle-1">I have an accordion and am animating the the height for a show reveal -
+      the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+      I have an accordion and am animating the the height fferent lengths.
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="js-toggle active" data-container="toggle-2">Click</div>
+    <div class="toggle-container open" id="toggle-2">I have an accordion and am animating the the height for a show
+      reveal - the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+      I have an accordion and am animating the the height fferent lengths.
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="js-toggle" data-container="toggle-3">Click</div>
+    <div class="toggle-container" id="toggle-3">I have an accordion and am animating the the height for a show reveal -
+      the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+      I have an accordion and am animating the the height fferent lengths.
+    </div>
+  </div>
+  <div class="box">
+    <div class="js-toggle" data-container="toggle-1">Click</div>
+    <div class="toggle-container" id="toggle-1">I have an accordion and am animating the the height for a show reveal -
+      the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+      I have an accordion and am animating the the height fferent lengths.
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="js-toggle active" data-container="toggle-2">Click</div>
+    <div class="toggle-container open" id="toggle-2">I have an accordion and am animating the the height for a show
+      reveal - the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+      I have an accordion and am animating the the height fferent lengths.
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="js-toggle" data-container="toggle-3">Click</div>
+    <div class="toggle-container" id="toggle-3">I have an accordion and am animating the the height for a show reveal -
+      the issue is the height which i need to set to auto as the information is different lengths.<br><br>
+      I have an accordion and am animating the the height fferent lengths.
+    </div>
+  </div>
+  <script>
+    var linkToggle = document.querySelectorAll('.js-toggle');
+
+    for (i = 0; i < linkToggle.length; i++) {
+
+      linkToggle[i].addEventListener('click', function (event) {
+
+        event.preventDefault();
+
+        var container = document.getElementById(this.dataset.container);
+        console.log(container)
+
+        if (!container.classList.contains('active')) {
+
+          container.classList.add('active');
+          container.style.height = 'auto';
+
+          var height = container.clientHeight + 'px';
+
+          container.style.height = '0px';
+
+          setTimeout(function () {
+            container.style.height = height;
+          }, 0);
+
+        } else {
+
+          container.style.height = '0px';
+
+          container.addEventListener('transitionend', function () {
+            container.classList.remove('active');
+          }, {
+            once: true
+          });
+
+        }
+
+      });
+
+    }
+  </script>
+</body>
+
+</html>
