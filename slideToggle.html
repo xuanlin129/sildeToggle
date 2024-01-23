@@ -17,6 +17,7 @@
       flex-direction: column;
       max-width: 720px;
       margin: auto;
+      padding: 1rem;
     }
 
     .content {
@@ -25,9 +26,19 @@
     }
 
     .content:not(.active) {
-      /* height: 0; */
       display: none;
-      /* transform: rotateX(90deg); */
+    }
+
+    .box2 {
+      width: 90%;
+      height: 300px;
+      background: #ccc;
+      margin: 10px auto;
+      border: 10px solid yellow;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
@@ -35,27 +46,53 @@
 <body>
   <div class="box">
     <img class="toggle" src="./images/824_LP02_03btn.png" alt="">
-    <img class="content active" src="./images/824_LP02_04.png" alt="">
+    <img class="content" src="./images/824_LP02_04.png" alt="">
   </div>
   <div class="box">
     <img class="toggle" src="./images/824_LP02_03btn.png" alt="">
-    <img class="content active" src="./images/824_LP02_04.png" alt="">
+    <p class="content">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error, quis minima suscipit nam blanditiis commodi
+      ducimus dignissimos nesciunt assumenda ab distinctio praesentium, iusto nisi. Odit, quas! Blanditiis voluptate
+      perspiciatis temporibus!
+    </p>
   </div>
+  <div class="box2">
+    <h3>點擊上方按鈕觸發slide動畫</h3>
+  </div>
+
   <script>
-    const toggles = document.querySelectorAll('.toggle');
+    const linkToggles = document.querySelectorAll('.toggle');
     const contents = document.querySelectorAll('.content')
 
-    toggles.forEach((toggle, i) => {
+    linkToggles.forEach((toggle, i) => {
       toggle.addEventListener('click', event => {
-        event.preventDefault()
-        console.log(toggle, contents[i])
-        if (!contents[i].classList.contains('active')) {
-          contents[i].classList.add('active')
+        event.preventDefault();
+        const content = contents[i]
+        if (!content.classList.contains('active')) {
+          toggle.attributes.src.value = './images/824_LP02_03btn2.png'
+          content.classList.add('active');
+          content.style.height = 'auto';
+          let height = content.clientHeight + 'px';
+          console.log(height)
+          content.style.height = '0px';
+          setTimeout(function () {
+            content.style.height = height;
+          }, 0);
         } else {
-          contents[i].classList.remove('active')
+          toggle.attributes.src.value = './images/824_LP02_03btn.png'
+          content.style.height = '0px';
+          content.addEventListener('transitionend', () => {
+            content.classList.remove('active');
+          }, {
+            once: true
+          });
         }
-      })
+      });
     })
+
+    for (const toggle of linkToggles) {
+      toggle.click()
+    }
   </script>
 </body>
 
